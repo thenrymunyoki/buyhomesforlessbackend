@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const connectDB = async () => {
   try {
     const conn = mongoose
-      .connect(process.env.MONGODB_URI || "mongodb://buyhomesadmin:buyhomesadmin@docdb-2023-07-27-09-31-50.cluster-ccjasygmazzv.us-east-1.docdb.amazonaws.com:27017", {
+      .connect(process.env.MONGODB_URI || "mongodb://buyhomesadmin:buyhomesadmin@docdb-2023-07-27-09-31-50.cluster-ccjasygmazzv.us-east-1.docdb.amazonaws.com:27017/?ssl=true&ssl_ca_certs=global-bundle.pem&replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false", {
         useNewUrlParser: true,
         useUnifiedTopology: true,
       })
