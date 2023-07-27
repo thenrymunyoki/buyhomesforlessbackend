@@ -18,7 +18,7 @@ mongoose.set("strictQuery", false);
 
 const PORT = process.env.PORT || 3000;
 const MONGODB_URI =
-  process.env.MONGODB_URI || "mongodb://buyhomesadmin:buyhomesadmin@@docdb-2023-07-27-09-31-50.cluster-ccjasygmazzv.us-east-1.docdb.amazonaws.com:27017";
+  process.env.MONGODB_URI || "mongodb://buyhomesadmin:buyhomesadmin@docdb-2023-07-27-09-31-50.cluster-ccjasygmazzv.us-east-1.docdb.amazonaws.com:27017";
 
 // middleware
 app.use(express.static(__dirname));
