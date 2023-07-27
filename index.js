@@ -5,22 +5,15 @@ require("dotenv").config();
 
 const router = require("./routes");
 const cors = require("cors");
-// const passport = require("passport");
-// const cookieSession = require("cookie-session");
-// const morgan = require("morgan");
-// const path = require("path");
 
 const app = express();
-
-// app.use(morgan("dev"));
 
 mongoose.set("strictQuery", false);
 
 const PORT = process.env.PORT || 3000;
 const MONGODB_URI =
-  process.env.MONGODB_URI || "mongodb://buyhomesadmin:buyhomesadmin@docdb-2023-07-27-09-31-50.cluster-ccjasygmazzv.us-east-1.docdb.amazonaws.com:27017";
+  process.env.MONGODB_URI || "mongodb://buyhomesadmin:buyhomesadmin@docdb-2023-07-27-09-31-50.cluster-ccjasygmazzv.us-east-1.docdb.amazonaws.com:27017/?ssl=true&ssl_ca_certs=global-bundle.pem&replicaSet=rs0&readPreference=secondaryPreferred&retryWrites=false";
 
-// middleware
 app.use(express.static(__dirname));
 app.use(express.json());
 const corsOptions = {
@@ -29,24 +22,16 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 mongoose
-  .connect(MONGODB_URI, { useNewUrlParser: true })
+  .connect(MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true, // Add this line for Mongoose 6.x or later
+  })
   .then(() => {
     console.log("MongoDB is connected");
   })
   .catch((err) => {
     console.log(err);
   });
-
-// app.use(
-//   cookieSession({
-//     name: "session",
-//     keys: ["buyhomeforless"],
-//   })
-// );
-
-// app.get("/*", (req, res) => {
-//   res.sendFile(path.join(__dirname, "index.html"));
-// });
 
 app.use("/", router);
 
@@ -57,7 +42,7 @@ const server = app.listen(PORT, () => {
 const io = require("socket.io")(server, {
   pingTimeout: 60000,
   cors: {
-    origin: ["http://localhost:3000", process.env.REACT_APP_CLIENT_URL], // frontend URI (ReactJS)
+    origin: ["http://localhost:3000", process.env.REACT_APP_CLIENT_URL],
   },
 });
 
