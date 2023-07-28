@@ -17,7 +17,7 @@ const MONGODB_URI =
 app.use(express.static(__dirname));
 app.use(express.json());
 const corsOptions = {
-  origin: [process.env.REACT_APP_CLIENT_URL, "http://localhost:3000"],
+  origin: [process.env.REACT_APP_CLIENT_URL, "https://buyhomesforless.onrender.com"],
 };
 app.use(cors(corsOptions));
 
